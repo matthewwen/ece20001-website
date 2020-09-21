@@ -47,6 +47,7 @@ export default function Lesson(props: Prop) {
         if (uidResponse == null) {
             return
         }
+
         const pageResponse = await FirebaseLessons.getPageByUid(uidResponse.uid);
         const attributes = pageResponse.data();
         setTitle(attributes["Title"])
