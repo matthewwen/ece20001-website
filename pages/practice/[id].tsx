@@ -28,6 +28,7 @@ export default function Lesson() {
             for (let i of attributes["practice"]) {
                 let lesson = await FirebaseLessons.loadLessonByUid(i);
                 items.push(lesson);
+                setProblems(items);
             }
             setProblems(items);
         }
