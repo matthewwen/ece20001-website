@@ -49,7 +49,7 @@ export default class Problem extends Component<any, any> {
         return (
             <Accordion
                 key={"Problem" + index}
-                defaultExpanded={true}>
+                defaultExpanded={index == 0}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography variant={"h6"} style={{flex: 1}}>{item.title}</Typography>
                 </AccordionSummary>
