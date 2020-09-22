@@ -5,10 +5,13 @@ import FirebaseInterface from "../../firebase/FirebaseInterface";
 import FirebaseLessons from "../../firebase/FirebaseLessons";
 import Problem from "../../components/problem";
 import {useRouter} from "next/router";
+import {CircularProgress} from "@material-ui/core";
+import {width} from "@material-ui/system";
 
 export default function Lesson() {
-    const [title, setTitle] = React.useState("");
+    const [title, setTitle] = React.useState("Loading..");
     const [problems, setProblems] = React.useState([]);
+    const [mounted, setMounted]   = React.useState(false);
     const router = useRouter();
     const {id} = router.query
     const route = "/practice/" + id;
@@ -28,8 +31,21 @@ export default function Lesson() {
             }
             setProblems(items);
         }
+        setMounted(true);
     }
     loadingData().then()
+
+    if (!mounted) {
+        return (
+            <ResponsiveDrawer title={title} route={route}>
+                <Head>
+                    <title>{title}</title>
+                    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
+                </Head>
+                <CircularProgress/>
+            </ResponsiveDrawer>
+        )
+    }
 
     return (
         <ResponsiveDrawer
