@@ -6,7 +6,6 @@ import FirebaseLessons from "../../firebase/FirebaseLessons";
 import Problem from "../../components/problem";
 import {useRouter} from "next/router";
 import {CircularProgress} from "@material-ui/core";
-import {width} from "@material-ui/system";
 
 export default function Lesson() {
     const [title, setTitle] = React.useState("Loading..");
@@ -36,18 +35,6 @@ export default function Lesson() {
     }
     loadingData().then()
 
-    if (!mounted) {
-        return (
-            <ResponsiveDrawer title={title} route={route}>
-                <Head>
-                    <title>{title}</title>
-                    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
-                </Head>
-                <CircularProgress/>
-            </ResponsiveDrawer>
-        )
-    }
-
     return (
         <ResponsiveDrawer
             route={route}
@@ -56,18 +43,18 @@ export default function Lesson() {
                 <title>{title}</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
             </Head>
+            {!mounted ?
+                <CircularProgress/>:
+                <div style={{maxWidth: 1080, marginLeft: "auto", marginRight: "auto"}}>
+                    {problems.map((item: FirebaseLessons, index) => (
+                        <Problem
+                            index={index}
+                            item={item}
+                        />
+                    ))}
 
-            <div style={{maxWidth: 1080, marginLeft: "auto", marginRight: "auto"}}>
-                {problems.map((item: FirebaseLessons, index) => (
-                    <Problem
-                        index={index}
-                        item={item}
-                    />
-                ))}
-
-            </div>
-
-
+                </div>
+            }
         </ResponsiveDrawer>
     )
 }

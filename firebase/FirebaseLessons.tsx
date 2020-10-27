@@ -46,12 +46,12 @@ export default class FirebaseLessons{
 
     static async getPageByUid(uid) {
         const db = FirebaseInterface.shared.db;
-        return await db.collection("ece20001\\pages").doc(uid).get();
+        return await db.collection("ece20001_pages").doc(uid).get();
     }
 
     static async getPracticeByUid(uid) {
         const db = FirebaseInterface.shared.db;
-        return await db.collection("ece20001\\practice").doc(uid).get();
+        return await db.collection("ece20001_practice").doc(uid).get();
     }
 
     static async getFirebasePicture(ref) {
